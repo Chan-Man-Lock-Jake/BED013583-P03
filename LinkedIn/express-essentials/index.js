@@ -19,8 +19,8 @@ app.post('/item', (request, response) => {
 
 app.route('/class')
 .get((request, response) => {
-    //response.send('Retrieve class info');
-    throw new Error();
+    response.send('Retrieve class info');
+    //throw new Error();
 })
 .post((request, response) => {
     response.send('Create class info');
