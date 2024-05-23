@@ -7,18 +7,21 @@ const validateBook = require("./middlewares/validateBook");
 
 const app = express();
 const port = process.env.PORT || 3000; // Use environment variable or default port
+const staticMiddleware = express.static("public"); // Path to the public folder
 
-const sqlQuery = "SELECT id, title, author FROM Books";
-const request = connection.request();
-const result = await request.query(sqlQuery);
+// const sqlQuery = "SELECT id, title, author FROM Books";
+// const request = connection.request();
+// const result = await request.query(sqlQuery);
 
-console.log(result.recordset); // Array of objects representing book rows
-console.log(result.recordset[0]); // First object (first row)
-console.log(result.recordset[0].id); // Accessing the "id" property from the first row
+// console.log(result.recordset); // Array of objects representing book rows
+// console.log(result.recordset[0]); // First object (first row)
+// console.log(result.recordset[0].id); // Accessing the "id" property from the first row
 
 // Include body-parser middleware to handle JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
+
+app.use(staticMiddleware); // Mount the static middleware
 
 // Routes for GET requests (replace with appropriate routes for update and delete later)
 app.get("/books", booksController.getAllBooks);
